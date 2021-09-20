@@ -120,13 +120,15 @@ function displayAnimalData (animalData) {
         document.getElementById('petName').textContent = `${animalData.name}`;
         document.getElementById('petGender').textContent = `${animalData.gender.toLowerCase()}`;
         document.getElementById('petBreed').textContent = `${animalData.breeds.primary}`;
-        document.getElementById('petPhoto').setAttribute('src', animalData.photos[0].large)
+        document.getElementById('petPhoto').setAttribute('src', animalData.photos[0].large);
         document.getElementById('petAge').textContent = `Age: ${animalData.age}`;
         document.getElementById('petSize').textContent = `Size: ${animalData.size}`;
 
         //Handles null description by
         if (animalData.description !== null) {
-            document.getElementById('petDescription').textContent = `${animalData.description}`;
+            var animalDesc = animalData.description;
+            animalDesc = animalDesc.replaceAll("&amp;#39;","'").replaceAll("&#039;","'");
+            document.getElementById('petDescription').textContent = `${animalDesc}`;
         };
 
         dogApiCall(animalData.breeds);
